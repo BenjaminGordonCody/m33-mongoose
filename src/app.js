@@ -2,17 +2,22 @@ require("./db/connection");
 const mongoose = require("mongoose");
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
-const { addFilm, list } = require("./film/filmMethods");
-const argv = yargs(hideBin(process.argv)).argv;
+const { addFilm, list, deleteFilm } = require("./film/filmMethods");
+const { movieObjFromArgs } = require("./obj");
+const argvObj = yargs(hideBin(process.argv)).argv;
 
 const app = async () => {
-  if (argv.add) {
+  if (argvObj.add) {
     await addFilm({
-      name: argv.title,
-      actor: argv.actor,
+      title: argvObj.title,
+      actor: argvObj.actor,
     });
-  } else if (argv.list) {
+  } else if (argvObj.list) {
     await list();
+  } else if (argvObj.delete) {
+    const requestObj = movieObjFromArgs(argvObj);
+    console.log(requestObj);
+    await deleteFilm(requestObj);
   } else {
     console.log("incorrect command");
   }

@@ -9,7 +9,6 @@ exports.addFilm = async (newFilm) => {
   } catch (error) {
     console.log(error);
   }
-  mongoose.connection.close();
 };
 
 exports.list = async () => {
@@ -19,5 +18,14 @@ exports.list = async () => {
   } catch (error) {
     console.log(error);
   }
-  mongoose.connection.close();
+};
+
+exports.deleteFilm = async (requestObj) => {
+  try {
+    console.log(requestObj);
+    await FilmModel.findOneAndDelete(requestObj);
+    console.log("delete request sent");
+  } catch (error) {
+    console.log(error);
+  }
 };
