@@ -9,4 +9,15 @@ exports.addFilm = async (newFilm) => {
   } catch (error) {
     console.log(error);
   }
+  mongoose.connection.close();
+};
+
+exports.list = async () => {
+  try {
+    let results = await FilmModel.find({});
+    console.log(results);
+  } catch (error) {
+    console.log(error);
+  }
+  mongoose.connection.close();
 };
