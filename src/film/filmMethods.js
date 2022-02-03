@@ -29,3 +29,22 @@ exports.deleteFilm = async (requestObj) => {
     console.log(error);
   }
 };
+
+exports.updateFilm = async (requestObj, updateObj) => {
+  try {
+    console.log(requestObj, updateObj);
+    const res = await FilmModel.updateOne(requestObj, updateObj);
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.findFilm = async (requestObj) => {
+  try {
+    let results = await FilmModel.find(requestObj);
+    console.log(results);
+  } catch (error) {
+    console.log(error);
+  }
+};
